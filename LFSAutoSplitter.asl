@@ -106,7 +106,11 @@ split {
 
 isLoading
 {
-   if(current.isRacing == 0 || current.crossedFinishLine == 1)
+    if(current.isRacing == 0)
+    {
+        return true;
+    }
+    else if(current.crossedFinishLine == 1 && current.levelIndex != 4)
     {
         return true;
     }
