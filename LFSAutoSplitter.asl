@@ -1,76 +1,101 @@
 state("LFS")
 {
-    int levelindex : 0x41F070;
+    int levelIndex : 0x41F070;
+    int isRacing: 0x5B197C;
 }
 
 init {}
 
 startup {}
 
-split {
+start {
+    if(old.isRacing == 0 && current.isRacing == 1) {
+        return true;
+    }
+}
 
-    // Do not finish the split if there is no level increase
-    if(current.levelindex - 1 != old.levelindex) {
+split {
+    // Only split on the first frame after level finishes
+    if(old.isRacing == 0 || current.isRacing == 1)
+    {
         return false;
     }
 
-    // Start Formula BMW
-    if(current.levelindex == 6) {
+    // End GTI 
+    if(current.levelIndex == 5) {
+        return true;
+    }
+        
+    // End Formula BMW
+    if(current.levelIndex == 13) {
         return true;
     }
 
-    // Start XR GT
-    if(current.levelindex == 14) {
+    // End XR GT
+    if(current.levelIndex == 17) {
         return true;
     }
 
-    // Start FXO
-    if(current.levelindex == 18) {
+    // End FXO
+    if(current.levelIndex == 19) {
         return true;
     }
 
-    // Start LX4
-    if(current.levelindex == 20) {
+    // End LX4
+    if(current.levelIndex == 21) {
         return true;
     }
 
-    // Start RB4
-    if(current.levelindex == 22) {
+    // End RB4
+    if(current.levelIndex == 23) {
         return true;
     }
 
-    // Start MRT
-    if(current.levelindex == 24) {
+    // End MRT
+    if(current.levelIndex == 25) {
         return true;
     }
 
-    // Start UF 1000
-    if(current.levelindex == 26) {
+    // End UF 1000
+    if(current.levelIndex == 27) {
         return true;
     }
 
-    // Start Race About
-    if(current.levelindex == 28) {
+    // End Race About
+    if(current.levelIndex == 29) {
         return true;
     }
 
-    // Start XF GTR
-    if(current.levelindex == 30) {
+    // End XF GTR
+    if(current.levelIndex == 31) {
         return true;
     }
 
-    // Start FZ50 GTR
-    if(current.levelindex == 32) {
+    // End FZ50 GTR
+    if(current.levelIndex == 33) {
         return true;
     }
 
-    // Start F08
-    if(current.levelindex == 34) {
+    // End F08
+    if(current.levelIndex == 35) {
         return true;
     }
 
-    // Start BF1
-    if(current.levelindex == 36) {
+    // End BF1
+    if(current.levelIndex == 37) {
         return true;
+    }
+    
+}
+
+isLoading
+{
+   if(current.isRacing == 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
     }
 }
