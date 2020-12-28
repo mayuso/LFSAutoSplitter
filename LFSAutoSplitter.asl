@@ -119,10 +119,3 @@ isLoading
         return false;
     }
 }
-gameTime
-{
-    if(current.IGT > old.IGT)
-    {
-        return TimeSpan.FromSeconds(current.IGT);
-    }
-}
