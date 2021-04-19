@@ -1,8 +1,7 @@
 state("LFS")
 {
     int levelIndex : 0x41F070;
-    int isRacing: 0x5B197C;
-    int crossedFinishLine: 0x43EC58, 0x4C;
+    int isRacing: 0x0E352C, 0x4C;
 }
 
 startup
@@ -15,7 +14,7 @@ startup
 
 start {
 
-    if(old.isRacing != 0 || current.isRacing == 0) {
+    if(current.isRacing == 0) {
         return false;
     }
     if((settings["All tests"] || settings["Demo"]) && current.levelIndex == 0)
@@ -34,7 +33,7 @@ start {
 
 split {
 
-    if(old.crossedFinishLine == 0 && current.crossedFinishLine == 1)
+    if(old.isRacing == 1 && current.isRacing == 0) {
     {
         // End GTI 
         if(current.levelIndex == 5) {
@@ -110,12 +109,5 @@ isLoading
     {
         return true;
     }
-    else if(current.crossedFinishLine == 1 && current.levelIndex != 4)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return false;
 }
