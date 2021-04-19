@@ -34,7 +34,6 @@ start {
 split {
 
     if(old.isRacing == 1 && current.isRacing == 0) {
-    {
         // End GTI 
         if(current.levelIndex == 5) {
             return true;
